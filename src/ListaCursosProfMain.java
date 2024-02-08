@@ -71,7 +71,7 @@ public class ListaCursosProfMain {
     }
 
     public static void listarValores(List<String> listaCursos, List<String> listaProfessores) {
-        if(listaProfessores == null){
+        if (listaProfessores == null) {
             System.out.println("\nLISTA DE CURSOS CONCLUÍDOS: \n");
             if (listaCursos.isEmpty()) {
                 System.out.println("Nenhum curso foi marcado como concluído.");
@@ -106,7 +106,7 @@ public class ListaCursosProfMain {
     public static int listarPedirIndice(Scanner scanner, List<String> listaCursos, List<String> listaProfessores) {
         boolean indiceValido = false;
         int indice = 0;
-        while (!indiceValido){
+        while (!indiceValido) {
             listarValores(listaCursos, listaProfessores);
             indice = obterIntValido(scanner, scanner.nextLine());
             if (!(indice >= 0 && indice < listaCursos.size())) {
@@ -118,8 +118,8 @@ public class ListaCursosProfMain {
     }
 
     public static void removerItem(int indice, List<String> listaCursos, List<String> listaProfessores) {
-            listaCursos.remove(indice);
-            listaProfessores.remove(indice);
+        listaCursos.remove(indice);
+        listaProfessores.remove(indice);
     }
 
     public static void marcarComoConcluido(Scanner scanner, List<String> listaCursos, List<String> listaProfessores, List<String> listaCursosConcluidos) {
