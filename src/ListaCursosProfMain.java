@@ -21,30 +21,16 @@ public class ListaCursosProfMain {
 
             if (entradaUsuario.equalsIgnoreCase("exit") ||
                     entradaUsuario.equalsIgnoreCase("0")) {
-                System.out.println("\n Os valores adicionados na lista de cursos foram: \n");
-                for(String s : listaCursos){
-                    System.out.println(" - " + s);
-                }
-
-                System.out.println("\n Os valores adicionados na lista de professores foram: \n");
-                for(String s : listaProfessores){
-                    System.out.println(" - " + s);
-                }
-                System.out.println("\n Saindo do programa.");
+                listarValores(listaCursos, listaProfessores);
+                scanner.close();
+                System.out.println("\nSaindo do programa.");
                 System.exit(0);
             }
 
-            switch (entradaUsuario.toLowerCase()) {
-                case "1":
-                    System.out.println("Digite o curso a ser inserido na lista. \n");
-                    adicionaEntradaLista(scanner, listaCursos);
-                    break;
-                case "2":
-                    System.out.println("Digite o professor a ser inserido na lista. \n");
-                    adicionaEntradaLista(scanner, listaProfessores);
-                    break;
-                default:
-                    System.out.println("Comando inválido. Use um dos comandos informados anteriormente. \n");
+            if (entradaUsuario.equalsIgnoreCase("1")) {
+                adicionaEntradaLista(scanner, listaCursos, listaProfessores);
+            } else {
+                System.out.println("Comando inválido. Use um dos comandos informados anteriormente. \n");
             }
 
 
@@ -54,10 +40,23 @@ public class ListaCursosProfMain {
 
     }
 
-    public static void adicionaEntradaLista(Scanner scanner, List<String> listaCursos)
+    public static void adicionaEntradaLista(Scanner scanner, List<String> listaCursos, List<String> listaProfessores)
     {
+        System.out.println("Digite o curso a ser inserido na lista. \n");
         String entrada = scanner.nextLine();
         listaCursos.add(entrada);
+        System.out.println("Digite o professor que leciona este curso. \n");
+        entrada = scanner.nextLine();
+        listaProfessores.add(entrada);
+    }
+
+    public static void listarValores(List<String> listaCursos, List<String> listaProfessores){
+        System.out.println("\nLISTA DE CURSOS/PROFESSORES: \n");
+        for(String c : listaCursos){
+            for(String p : listaProfessores){
+                System.out.println(" - Curso: " + c + " - Professor: " + p);
+            }
+        }
     }
 
     public static void printLogoFMT()
@@ -74,8 +73,7 @@ public class ListaCursosProfMain {
 
     public static void mostrarMenuPrincipal(){
         System.out.println("Bem vindo ao programa de exercicios do Modulo 1 - Semana 4 do curso FullStack. \n");
-        System.out.println("Para adicionar um curso a lista, digite '1' \n");
-        System.out.println("Para adicionar um professor a lista, digite '2' \n");
+        System.out.println("Para adicionar um curso/professor a lista, digite '1' \n");
         System.out.print("Para sair do programa, digite 'exit' ou '0'. \n");
     }
 }
