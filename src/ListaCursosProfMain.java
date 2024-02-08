@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static utils.ValidacaoValoresUtils.obterIntValido;
 import static utils.ValidacaoValoresUtils.obterStringNaoVazia;
 
 public class ListaCursosProfMain {
@@ -23,7 +24,7 @@ public class ListaCursosProfMain {
             if (entradaUsuario.equalsIgnoreCase("sair") ||
                     entradaUsuario.equalsIgnoreCase("0")) {
                 listarValores(listaCursos, listaProfessores);
-                System.out.println("\n Saindo do programa.");
+                System.out.println("\nSaindo do programa.");
                 scanner.close();
                 System.exit(0);
             }
@@ -34,6 +35,13 @@ public class ListaCursosProfMain {
                     break;
                 case "2":
                     adicionaEntradaLista(scanner, listaCursos, listaProfessores);
+                    break;
+                case "3":
+                    if(listaCursos.isEmpty() && listaProfessores.isEmpty()){
+                        System.out.println("\nA lista de curso/professores está vazia. Não é possível remover um curso se não nada a ser removido.");
+                        System.out.println("Para executar essa operação, antes adicione algum curso/professor. \n");
+                    } else
+                        removerEntradaLista(scanner, listaCursos, listaProfessores);
                     break;
                 default:
                     System.out.println("Comando inválido. Use um dos comandos informados anteriormente. \n");
@@ -65,6 +73,27 @@ public class ListaCursosProfMain {
         }
     }
 
+    public static void removerEntradaLista(Scanner scanner, List<String> listaCursos, List<String> listaProfessores) {
+        removerItem(listarPedirIndice(scanner, listaCursos, listaProfessores), listaCursos, listaProfessores, scanner);
+    }
+
+    public static String listarPedirIndice(Scanner scanner, List<String> listaCursos, List<String> listaProfessores) {
+        listarValores(listaCursos, listaProfessores);
+        System.out.println("Digite o índice a ser removido da lista. \n");
+        return scanner.nextLine();
+    }
+
+    public static void removerItem(String indice, List<String> listaCursos, List<String> listaProfessores, Scanner scanner) {
+        int valorIndice = obterIntValido(scanner, indice);
+        if (valorIndice >= 0 && valorIndice < listaCursos.size()) {
+            listaCursos.remove(valorIndice);
+            listaProfessores.remove(valorIndice);
+            System.out.println("Curso removido com sucesso!");
+        } else {
+            System.out.println("O índice está fora dos limites da lista.");
+        }
+    }
+
     public static void printLogoFMT()
     {
         System.out.println("███████╗██╗   ██╗██╗     ██╗         ███████╗████████╗ █████╗  ██████╗██╗  ██╗");
@@ -80,6 +109,7 @@ public class ListaCursosProfMain {
     public static void mostrarMenuPrincipal(){
         System.out.println("\nPara listar os valores adicionados, digite '1'.");
         System.out.println("Para adicionar um curso/professor a lista, digite '2'.");
+        System.out.println("Para remover um curso/professor da lista, digite '3'.");
         System.out.print("Para sair do programa, digite 'exit' ou '0'. \n");
     }
 }
