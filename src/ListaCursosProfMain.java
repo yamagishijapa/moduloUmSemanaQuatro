@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static utils.ValidacaoValoresUtils.obterStringNaoVazia;
+
 public class ListaCursosProfMain {
 
     public static void main(String[] args) {
@@ -43,19 +45,20 @@ public class ListaCursosProfMain {
     public static void adicionaEntradaLista(Scanner scanner, List<String> listaCursos, List<String> listaProfessores)
     {
         System.out.println("Digite o curso a ser inserido na lista. \n");
-        String entrada = scanner.nextLine();
+        String entrada = obterStringNaoVazia(scanner, scanner.nextLine());
         listaCursos.add(entrada);
         System.out.println("Digite o professor que leciona este curso. \n");
-        entrada = scanner.nextLine();
+        entrada = obterStringNaoVazia(scanner, scanner.nextLine());
         listaProfessores.add(entrada);
     }
 
     public static void listarValores(List<String> listaCursos, List<String> listaProfessores){
         System.out.println("\nLISTA DE CURSOS/PROFESSORES: \n");
-        for(String c : listaCursos){
-            for(String p : listaProfessores){
-                System.out.println(" - Curso: " + c + " - Professor: " + p);
-            }
+
+        for (int i = 0; i < listaCursos.size(); i++) {
+            String curso = listaCursos.get(i);
+            String professor = listaProfessores.get(i);
+            System.out.println(" - Curso: " + curso + ", Professor: " + professor);
         }
     }
 
