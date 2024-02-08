@@ -60,7 +60,7 @@ public class ListaCursosProfMain {
             for (int i = 0; i < listaCursos.size(); i++) {
                 String curso = listaCursos.get(i);
                 String professor = listaProfessores.get(i);
-                System.out.println(" - Curso: " + curso + ", Professor: " + professor);
+                System.out.println(i + " - Curso: " + curso + ", Professor: " + professor);
             }
         }
     }
